@@ -25,9 +25,32 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_BOOK = gql`
-
+#   mutation saveBook($thoughtText: String!) {
+#     addThought(thoughtText: $thoughtText) {
+#       _id
+#       thoughtText
+#       thoughtAuthor
+#       createdAt
+#       comments {
+#         _id
+#         commentText
+      }
+    }
+  }
 `;
 
 export const REMOVE_BOOK = gql`
-
+#   mutation addComment($thoughtId: ID!, $commentText: String!) {
+#     addComment(thoughtId: $thoughtId, commentText: $commentText) {
+#       _id
+#       thoughtText
+#       thoughtAuthor
+#       createdAt
+#       comments {
+#         _id
+#         commentText
+#         createdAt
+#       }
+#     }
+#   }
 `;
