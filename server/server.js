@@ -3,6 +3,7 @@ const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const db = require('./config/connection');
 const routes = require('./routes');
+const { authMiddleware } = require('./utils/auth');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -17,7 +18,8 @@ if (process.env.NODE_ENV === 'production') {
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  context: authMiddleware
 });
 
 server.applyMiddleware({ app });
