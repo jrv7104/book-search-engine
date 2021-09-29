@@ -44,8 +44,29 @@ const resolvers = {
         return { token, user };
       },
       
-      saveBook: 
+      saveBook: async (parent, args, context) => {
+        if (context.user) {
+          const updateData = await User.findByIdAndUpdate(
+            {_id: context.user._id},
+            {$push: {savedBooks: args.bookData}},
+            {new: true}
+          )
+          return updateData;
+        }
+        throw new AuthenticationError('Need to be signed in') 
+      },
      
+      removeBook: async (parent, args, context) => {
+        if (context.user) {
+          const updateData = await User.findByIdAndUpdate(
+            {_id: context.user._id},
+            {$pull: {savedBooks: args.bookId}},
+            {new: true}
+          )
+          return updateData;
+        }
+        throw new AuthenticationError('Need to be signed in')
+      }
  
 
     },
