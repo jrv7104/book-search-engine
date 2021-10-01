@@ -20,7 +20,6 @@ export const ADD_USER = gql`
       user {
         email
         username
-        password
       }
     }
   }
